@@ -1,0 +1,156 @@
+
+$Id: TODO,v 1.55 2008-09-01 00:02:40 thomson Exp $
+
+Colors:
+
+light-green 2001:4f8:ff00:ff01::/64
+yellow      2001:4f8:ff00:ff02::/64
+blue        2001:4f8:ff00:ff03::/64 (cisco)
+green       2001:4f8:ff00:ff04::/64 (hp-ux)
+red         2001:4f8:ff00:ff05::/64
+orange      2001:4f8:ff00:ff06::/64
+green-cross
+pink        2001:4f8:ff00:ff07::/64 (dibbler)
+
+ TODO
+------
+- When RELEASEing PDs, there's a warning about second attempt to remove PD from AddrMgr.
+- Remove msg cache from server.
+- Add GetCfgMgr, GetAddrMgr, GetTransMgr, GetIfaceMgr singletons
+
+ Philly bakeoff BUGS/OBSERVATIONS
+----------------------------------
+1. There are 2 servers, one of them responds with IA/NOADDRSAVAIL, second responds fine.
+   Client sends REQUEST and gets address configured. BUG: It also sends another SOLICIT.
+2. Several RELEASEs from Richard, sending REPLYies.
+3. HP-UX server sends address with valid-lifetime set to 0. Client adds and removes address immediately,
+   then waits 30 seconds for RENEW. Dibbler client tries to RENEW and crash.
+4. Client stateless. Insist mode implemented. [done]
+5. Client gets confused when after RENEW, server sends NO-BINDING. The address eventually expires
+   and client sleeps for 0xffffffff seconds.
+6. Make (INFORMATION_REFRESH_TIME configurable).
+7. Dibbler client asks for TA, dibbler server provides it. Client accepts, adds address, but for some
+   reason it sends SOLICIT.
+8. Leasequery: (Discussion with Bernie) Asking about address from the pool, but not assigned, should
+   return empty (without LQ Client option) response. Asking about address outside of the pool should
+   report not-configured (that works ok right now).
+9. Add configuration to send InfRefreshTime in stateless-mode
+
+ Vancouver bakeoff BUGS/OBSERVATIONS
+-------------------------------------
++ Windows client tested.
+
+1. Zero padding in DUID parsing (e.g. in requestor cmd-line, but the TDUID constructor is messed up)
+   is wrong: 0:1:2:3:4:5 parsed as: 012345
+2. Cli gets addr from SRV1, SRV1 goes down, CLI rebinds to SRV2 and gets addr from it.
+   CLI sends renew for both addrs: the one it got from SRV1 and
+   SRV2. [nobug. That is proper behavior. First address is still valid.]
+3. Client does not request for a UNICAST option (does not send the ORO with unicast). [done]
+4. Unicast over 2 relays does not work. Cli send Solicit, Srv sends ADV, CLI send REQ using unicast address,
+   but that REQ is not seen by the SRV.
+5. CLI should send REQ to multicast (because it does not have address with sufficient scope). [done]
+6. CLI gets addr from SRV, SRV goes down and up, SRV ignores RENEW, then goes REBIND,
+   and then goes for RENEW. (should go SOLICIT)
+7. SRV configured to pref: 60 valid: 120, CLI asks for 7200/10800 and SRV grants 7200/10800.
+   (CLI behind double relay, looks like messing pools, i.e. using pool
+   on the eth0, not relay2 interface). [rootcause: server misconfiguration]
+8. SRV: LeaseQuery (by address) about PD should check if the address is contained within the prefix.
+9. Implement insist-mode off in stateless autoconf.
+10. Windows client does not set DNS server in the stateless mode.
+11. DAD does not work on Windows.
+12. FQDN does not start if rapid-commit is used.
+13. No log created (no directory) silently omitted.
+
+New tasks should be added to the TODO list. After task is implemented, it should be moved to the
+'DONE/Not Validated' list. After confirmation that it is working properly, it can be removed completely.
+
+- CLI: link-change detection: part of the log file.
+ kernel: ADDRCONF(NETDEV_UP): eth1: link is not ready                                                              
+ kernel: ADDRCONF(NETDEV_CHANGE): eth1: link becomes ready                
+
+  Internal/code TODO
+ --------------------
+- CLI: AUTH: set ClntCfgIface->getKeyGenerationState() somewhere
+- CLI: PD: this should be possible "iface eth0 { pd { prefix 2000::/64 } }"
+- CLI: PD: this should be possible "iface eth0 { pd { prefix prefix } }"
+- SRV: PD: prefixes are not removed from db if valid goes to 0.
+- CLI: PD: radvd.conf is invalid if there were more than one prefix added to the same interface
+- CLI: Implement client side prefix delegation hints. It must be possible to define, what prefix(es) client
+       will send as hints.
+- SRV: Prefixes stored in server's AddrMgr for too long (i.e. after its valid lifetime has expired) should be
+       removed from the server's database (see SrvAddrMgr::doDuties())
+- CLI: When server is not configured to support PD and client requests PD, server sends PD with status code
+  set to NOADDRSAVAIL (that is ok). However, client should complain about it (and maybe try to do something with it). 
+  Right now it prints information that "PD set successfully."
+- SRV/REL: Support InterfaceID option with length other than 4
+- ALL: Migrate SmartPtr -> SPtr, TIPv6Addr -> TAddr
+- ALL: Make TAddrAddr a derived class from TAddr
+- CLI: Remember last assigned address.
+- DOC: Add "Static reservation" section to User's Guide (describe white-list and cache-function)
+- CLI/BUG: when FQDN is assigned, client performs update first, then verifies tentative status.
+       It should be done in reverse order.
+- SRV: When client does not send RELEASE (crash, went out of range), server does not perform FQDN delete.
+- When server shuts down, it does not perform FQDN delete.
+- SRV/CLI: TransMgr->dump() should be implemented.
+- CLI: Clnt requests for Address and options (receives both and lifetime option). It should send renew only if T1<lifetime
+  and renew and inf-request if T1>lifetime.
+- REL: 20. RFC3315: If the relay agent has not been explicitly configured, it MUST use the All_DHCP_Servers multicast address as the default.
+- CLI: setting up a domain: echo homenetwork > /etc/dnsdomainname
+- check server's behavior: there isn't any addrs left, and srv receives SOLICIT.
+  Does PREFERENCE have normal value (e.g. not faulty 255, check
+   tex/test09/10th packet)
+- When client receives NO-ADDR AVAILABLE, it simultaneusly: starts SOLICIT transaction, sends REQUEST to
+  next server on backup list.
+- test11: reply contains empty IA with 2 STATUS CODE options: 1. unspecfail (1) + description "no such IA"
+  2. ok (!!!) [This entry is so old and lots of the code has  been rewritten since. Is it still valid bug?]
+- CLI: client's answers are generated by answer(...) method, whereas server's answers
+   are generated in the relayMsg method by differents constructors of the same message.
+   Shouldn't it be better to make it homogeneous ? I don't have any preference :)
+- CLI: ClntIfaceMgr: remove ugly sleep(3) instruction.
+- CLI: Server ADVERTISE evaluations. There should be some kind of ranking
+   system, which checks that IAs, TAs and PDs were provided. And
+   options too.
+- SRV/CLI: Suboptions parsing. It's done in lots of places, but should be done
+   in one. e.g. TSrvOptIA_NA, TClntOptIA_NA, TClntOptTA, TSrvOptTA constructors.
+- SRV: {Server|Client}Identifier is added in numerous places in SrvOpt*.cpp. It should be added
+   in TSrvMsg::appendRequestedOptions()
+- SRV: How many addrs can be assigned to the client? Implement counter in the TAddrClient class.
+- TEST: Implement test environment [Megatask]
+
+  DONE/Not validated
+ --------------------
+- CLI: Elapsed time is not recalculated when SOLICIT is resent
+- CLI: Win32: prefix delegation low-level support is not implemented.
+- CLI: PD: prefixes are not removed if valid goes to 0.
+- CLI: PD: Rebind attempt segfaults
+- CLI: PD: this cfg: "iface eth0 { pd }" does not work
+- CLI: PD: this should be possible "iface eth0 { pd pd }"
+- CLI: PD: RENEW does not work
+- ALL: Fix linux low-level interface (don't use PKTINFO anymore).
+- SRV: Prefix hint analysis. (client support for hints is required)
+- SRV: Perform DNS Update delete, when RELEASE is sent (SrvMsgReply.cpp:387)
+- CLI: Perform DNS Update delete, when RELEASE is sent (ClntMsgRelease.cpp:102)
+- CLI/BUG: domain format in /etc/resolv.conf must be fixed
+
+  DONE
+ ------
+- CLI: Linux: prefixes should be moved to Port-linux.
+- DOC: Describe dumping XML files, option files
+- SRV: Crashes when not configured to support prefix-delegation, but client sends pd option.
+- DOC: Describe strict-rfc-no-routing on the client side
+- CLI/BUG: option fqdn - does not work, option fqdn some.name.com must be used in client.conf file
+- SRV: Add cache. SrvAddrMgr - cachedLst.
+- SRV: Add to SrvParser options: cache-size
+- SRV: Store cache on disk. Read cache during startup.
+- SRV/CLI: Implement vendor-class support.
+- CLI: Add address with /64 prefix, add option to ClntParser strict-rfc-no-routing
+  to disable this.
+
+  BUGS
+ ------
+ See http://klub.com.pl/bugzilla/
+
+  INFO
+ ------
+- Linux kernel does not support finite lifetimes: kernel sources:
+   addrconf.c:  inet6_rtm_newaddr() :1579, functions ipv6_add_addr and in ndisc.c:ndisc_router_discovery

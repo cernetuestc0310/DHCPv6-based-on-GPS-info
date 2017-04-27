@@ -1,0 +1,134 @@
+libnetlink.c: In function ‘rtnl_open_byproto’:
+libnetlink.c:40:23: warning: argument to ‘sizeof’ in ‘memset’ call is the same expression as the destination; did you mean to dereference it? [-Wsizeof-pointer-memaccess]
+  memset(rth, 0, sizeof(rth));
+                       ^
+libnetlink.c: In function ‘rtnl_dump_request’:
+libnetlink.c:126:5: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   { .iov_base = &nlh, .iov_len = sizeof(nlh) },
+     ^
+libnetlink.c:126:3: warning: initializer element is not computable at load time [enabled by default]
+   { .iov_base = &nlh, .iov_len = sizeof(nlh) },
+   ^
+libnetlink.c:126:23: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   { .iov_base = &nlh, .iov_len = sizeof(nlh) },
+                       ^
+libnetlink.c:126:3: warning: initializer element is not computable at load time [enabled by default]
+   { .iov_base = &nlh, .iov_len = sizeof(nlh) },
+   ^
+libnetlink.c:127:5: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   { .iov_base = req, .iov_len = len }
+     ^
+libnetlink.c:127:3: warning: initializer element is not computable at load time [enabled by default]
+   { .iov_base = req, .iov_len = len }
+   ^
+libnetlink.c:127:22: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   { .iov_base = req, .iov_len = len }
+                      ^
+libnetlink.c:127:3: warning: initializer element is not computable at load time [enabled by default]
+   { .iov_base = req, .iov_len = len }
+   ^
+libnetlink.c:127:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:130:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_name = &nladdr,
+   ^
+libnetlink.c:130:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:131:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_namelen =  sizeof(nladdr),
+   ^
+libnetlink.c:132:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iov = iov,
+   ^
+libnetlink.c:132:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:133:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iovlen = 2,
+   ^
+libnetlink.c: In function ‘rtnl_dump_filter’:
+libnetlink.c:157:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_name = &nladdr,
+   ^
+libnetlink.c:157:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:158:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_namelen = sizeof(nladdr),
+   ^
+libnetlink.c:159:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iov = &iov,
+   ^
+libnetlink.c:159:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:160:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iovlen = 1,
+   ^
+libnetlink.c: In function ‘rtnl_talk’:
+libnetlink.c:239:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .iov_base = (void*) n,
+   ^
+libnetlink.c:239:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:240:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .iov_len = n->nlmsg_len
+   ^
+libnetlink.c:241:2: warning: initializer element is not computable at load time [enabled by default]
+  };
+  ^
+libnetlink.c:243:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_name = &nladdr,
+   ^
+libnetlink.c:243:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:244:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_namelen = sizeof(nladdr),
+   ^
+libnetlink.c:245:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iov = &iov,
+   ^
+libnetlink.c:245:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:246:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iovlen = 1,
+   ^
+libnetlink.c: In function ‘rtnl_listen’:
+libnetlink.c:359:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_name = &nladdr,
+   ^
+libnetlink.c:359:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:360:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_namelen = sizeof(nladdr),
+   ^
+libnetlink.c:361:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iov = &iov,
+   ^
+libnetlink.c:361:3: warning: initializer element is not computable at load time [enabled by default]
+libnetlink.c:362:3: warning: ISO C90 forbids specifying subobject to initialize [-Wpedantic]
+   .msg_iovlen = 1,
+   ^
+libnetlink.c: In function ‘rtnl_from_file’:
+libnetlink.c:436:17: warning: variable ‘type’ set but not used [-Wunused-but-set-variable]
+   int err, len, type;
+                 ^
+In file included from libnetlink.c:26:0:
+libnetlink.c: In function ‘addattr32’:
+libnetlink.h:54:40: warning: pointer of type ‘void *’ used in arithmetic [-Wpedantic]
+  ((struct rtattr *) (((void *) (nmsg)) + NLMSG_ALIGN((nmsg)->nlmsg_len)))
+                                        ^
+libnetlink.c:485:8: note: in expansion of macro ‘NLMSG_TAIL’
+  rta = NLMSG_TAIL(n);
+        ^
+libnetlink.c: In function ‘addattr_l’:
+libnetlink.h:54:40: warning: pointer of type ‘void *’ used in arithmetic [-Wpedantic]
+  ((struct rtattr *) (((void *) (nmsg)) + NLMSG_ALIGN((nmsg)->nlmsg_len)))
+                                        ^
+libnetlink.c:503:8: note: in expansion of macro ‘NLMSG_TAIL’
+  rta = NLMSG_TAIL(n);
+        ^
+libnetlink.c: In function ‘addraw_l’:
+libnetlink.h:54:40: warning: pointer of type ‘void *’ used in arithmetic [-Wpedantic]
+  ((struct rtattr *) (((void *) (nmsg)) + NLMSG_ALIGN((nmsg)->nlmsg_len)))
+                                        ^
+libnetlink.c:518:9: note: in expansion of macro ‘NLMSG_TAIL’
+  memcpy(NLMSG_TAIL(n), data, len);
+         ^
+libnetlink.h:54:40: warning: pointer of type ‘void *’ used in arithmetic [-Wpedantic]
+  ((struct rtattr *) (((void *) (nmsg)) + NLMSG_ALIGN((nmsg)->nlmsg_len)))
+                                        ^
+libnetlink.c:519:18: note: in expansion of macro ‘NLMSG_TAIL’
+  memset((void *) NLMSG_TAIL(n) + len, 0, NLMSG_ALIGN(len) - len);
+                  ^
+libnetlink.c:519:32: warning: pointer of type ‘void *’ used in arithmetic [-Wpedantic]
+  memset((void *) NLMSG_TAIL(n) + len, 0, NLMSG_ALIGN(len) - len);
+                                ^

@@ -1,0 +1,8 @@
+prefix=/usr/local
+exec_prefix=/usr/local
+
+Name: Poslib
+Description: DNS client library
+Version: 1.1.0pre-090118
+Libs: -L${exec_prefix}/lib -lposlib  -lstdc++ -lpthread 
+Cflags: -I${prefix}/include/poslib-1.1.0pre-090118 -I${exec_prefix}/lib/poslib-1.1.0pre-090118/include/ -D_REENTRANT
