@@ -1,7 +1,0 @@
-iproute.c: In function ‘iproute_modify’:
-iproute.c:670:6: warning: variable ‘type_ok’ set but not used [-Wunused-but-set-variable]
-  int type_ok = 0;
-      ^
-iproute.c:669:6: warning: variable ‘proto_ok’ set but not used [-Wunused-but-set-variable]
-  int proto_ok = 0;
-      ^
