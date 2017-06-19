@@ -1,0 +1,27 @@
+
+  Dibbler 0.7.2 release notes [2008-08-31]
+ ---------------------------------------------------------
+
+ This is a final 0.7.2 release. 
+
+ That is a special release. Its main difference comapared to previous
+ releases is that it contains extra features for IPv6 tunnel configuration
+ and that it is released under GNU GPL v2 only.
+ 
+ Please note that previous versions were released as "GPL v2 or later".
+ Following releases (be it 0.7.3 or 0.8.0) will again be released as 
+ "GPL v2 or later". 
+ 
+ A word of explanation: This temporary license change is useful for 
+ companies that have concerns regarding GPL v3.
+
+ See CHANGELOG for a complete list of changes.
+
+ If you find bugs, please report it on http://klub.com.pl/bugzilla/
+ or send bug report directly to the author. Appropriate links are on 
+ project website: http://klub.com.pl/dhcpv6/. If you need help or want
+ to share your thoughts, take a look at one of the Dibbler-related
+ mailing lists: dibbler or dibbler-devel.
+
+                               Tomasz Mrugalski,
+                               author

@@ -1,0 +1,10 @@
+utils.c: In function ‘get_u64’:
+utils.c:66: warning: ISO C90 does not support ‘long long’
+utils.c:72:43: warning: use of C99 long long integer constant
+utils.c: In function ‘inet_addr_match’:
+utils.c:333: warning: initialization discards qualifiers from pointer target type
+utils.c:334: warning: initialization discards qualifiers from pointer target type
+utils.c: In function ‘__get_hz’:
+utils.c:368: warning: ISO C forbids omitting the middle term of a ?: expression
+utils.c: In function ‘getcmdline’:
+utils.c:586: warning: implicit declaration of function ‘getline’

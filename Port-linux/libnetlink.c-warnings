@@ -1,0 +1,49 @@
+libnetlink.c: In function ‘rtnl_dump_request’:
+libnetlink.c:126: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:126: warning: initializer element is not computable at load time
+libnetlink.c:126: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:126: warning: initializer element is not computable at load time
+libnetlink.c:127: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:127: warning: initializer element is not computable at load time
+libnetlink.c:127: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:127: warning: initializer element is not computable at load time
+libnetlink.c:127: warning: initializer element is not computable at load time
+libnetlink.c:130: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:130: warning: initializer element is not computable at load time
+libnetlink.c:131: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:132: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:132: warning: initializer element is not computable at load time
+libnetlink.c:133: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c: In function ‘rtnl_dump_filter’:
+libnetlink.c:157: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:157: warning: initializer element is not computable at load time
+libnetlink.c:158: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:159: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:159: warning: initializer element is not computable at load time
+libnetlink.c:160: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c: In function ‘rtnl_talk’:
+libnetlink.c:239: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:239: warning: initializer element is not computable at load time
+libnetlink.c:240: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:241: warning: initializer element is not computable at load time
+libnetlink.c:243: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:243: warning: initializer element is not computable at load time
+libnetlink.c:244: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:245: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:245: warning: initializer element is not computable at load time
+libnetlink.c:246: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c: In function ‘rtnl_listen’:
+libnetlink.c:359: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:359: warning: initializer element is not computable at load time
+libnetlink.c:360: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:361: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c:361: warning: initializer element is not computable at load time
+libnetlink.c:362: warning: ISO C90 forbids specifying subobject to initialize
+libnetlink.c: In function ‘addattr32’:
+libnetlink.c:485: warning: pointer of type ‘void *’ used in arithmetic
+libnetlink.c: In function ‘addattr_l’:
+libnetlink.c:503: warning: pointer of type ‘void *’ used in arithmetic
+libnetlink.c: In function ‘addraw_l’:
+libnetlink.c:518: warning: pointer of type ‘void *’ used in arithmetic
+libnetlink.c:519: warning: pointer of type ‘void *’ used in arithmetic
+libnetlink.c:519: warning: pointer of type ‘void *’ used in arithmetic
