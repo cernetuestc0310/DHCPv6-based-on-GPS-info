@@ -884,7 +884,7 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 			}
 			int b = 0;
 			if('a'<= mac_add[1]){
-				b = 10 + mac_add[1] - a;
+				b = 10 + mac_add[1] - 'a';
 			}
 			else{
 				b = mac_add[1] - '0';
