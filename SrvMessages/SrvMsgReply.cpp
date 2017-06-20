@@ -824,6 +824,9 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 			std::string vendor_rly=v->getVendorDataPlain();
 			std::string vendor_type_rly, vendor_len_rly, 
 				vendor_x_rly, vendor_y_rly, vendor_z_rly;
+			if(0==vendor_rly.find("0x")){
+				vendor_rly=vendor_rly.substr(2,vendor_rly.length()-2);
+			}
 			vendor_type_rly = vendor_rly.substr(0, 4);
 			vendor_len_rly= vendor_rly.substr(4, 4);
 			vendor_x_rly= vendor_rly.substr(8, 9);
@@ -833,7 +836,7 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 			std::string type2clntaddr=clntAddr->getPlain();
 
 
-// HSD  2017-06-13 -------IPv6本地链路地址到MAC的转换-------
+			// HSD  2017-06-13 -------IPv6本地链路地址到MAC的转换-------
 			string mac_add = "00:00:00:00:00:00";
 			string ip_add = type2clntaddr;
 			size_t pos = ip_add.length() - 1;
@@ -894,7 +897,7 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 				mac_add[1] = 'a' + b - 10;
 			}
 			type2clntaddr=mac_add;
-//-----------------------------------------------------------
+			//-----------------------------------------------------------
 			if(vendor_type_rly=="0002")
 			{
 

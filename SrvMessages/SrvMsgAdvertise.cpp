@@ -237,6 +237,9 @@ bool TSrvMsgAdvertise::answer(SmartPtr<TSrvMsgSolicit> solicit) {
 			std::string vendor=v->getVendorDataPlain();
 			std::string vendor_type, vendor_len, 
 				vendor_x, vendor_y, vendor_z;
+			if(0==vendor.find("0x")){
+				vendor=vendor.substr(2,vendor.length()-2);
+			}
 			vendor_type = vendor.substr(0, 4);
 			vendor_len = vendor.substr(4, 4);
 			vendor_x = vendor.substr(8, 9);
@@ -245,7 +248,7 @@ bool TSrvMsgAdvertise::answer(SmartPtr<TSrvMsgSolicit> solicit) {
 
 			std::string type2clntaddr=clntAddr->getPlain();
 
-// HSD  2017-06-13 -------IPv6本地链路地址到MAC的转换-------
+			// HSD  2017-06-13 -------IPv6本地链路地址到MAC的转换-------
 			string mac_add = "00:00:00:00:00:00";
 			string ip_add = type2clntaddr;
 			size_t pos = ip_add.length() - 1;
@@ -306,7 +309,7 @@ bool TSrvMsgAdvertise::answer(SmartPtr<TSrvMsgSolicit> solicit) {
 				mac_add[1] = 'a' + b - 10;
 			}
 			type2clntaddr=mac_add;
-//-----------------------------------------------------------
+			//-----------------------------------------------------------
 			if(vendor_type=="0002")
 			{
 
