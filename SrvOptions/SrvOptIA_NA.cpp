@@ -288,7 +288,7 @@ TSrvOptIA_NA::TSrvOptIA_NA(SmartPtr<TSrvAddrMgr> addrMgr,  SmartPtr<TSrvCfgMgr> 
 					s1=gps_addrall;
 					s2=this->ClntAddr->getPlain();
 
-					
+
 					// HSD  2017-06-13 -------IPv6本地链路地址到MAC的转换-------
 
 					std::string mac_add = "00:00:00:00:00:00";
@@ -310,17 +310,23 @@ TSrvOptIA_NA::TSrvOptIA_NA(SmartPtr<TSrvAddrMgr> addrMgr,  SmartPtr<TSrvCfgMgr> 
 						}
 					}
 					pos = i;
-					int a = pos + 3;
-					int ipt = 9;
-					for(; a < ip_add.length(); a++){
+					int a = ip_add.length() - 1;
+					int ipt = 16;
+					for(; a > pos + 2; a--){
 						if(':' != ip_add[a]){
 							if( ':' != mac_add[ipt]){
-								mac_add[ipt++] = ip_add[a];
+								mac_add[ipt--] = ip_add[a];
 							}
 							else{
-								mac_add[++ipt] = ip_add[a];
-								ipt++;
+								mac_add[--ipt] = ip_add[a];
+								ipt--;
 							}
+						}
+						else{
+							while(':' != mac_add[ipt]){
+								ipt--;
+							}
+							ipt--;
 						}
 					}
 					ipt = 7;
@@ -334,6 +340,12 @@ TSrvOptIA_NA::TSrvOptIA_NA(SmartPtr<TSrvAddrMgr> addrMgr,  SmartPtr<TSrvCfgMgr> 
 								mac_add[--ipt] = ip_add[a];
 								ipt--;
 							}
+						}
+						else{
+							while(':' != mac_add[ipt]){
+								ipt--;
+							}
+							ipt--;
 						}
 					}
 					int b = 0;
@@ -351,7 +363,7 @@ TSrvOptIA_NA::TSrvOptIA_NA(SmartPtr<TSrvAddrMgr> addrMgr,  SmartPtr<TSrvCfgMgr> 
 						mac_add[1] = 'a' + b - 10;
 					}
 					s2=mac_add;
-					
+
 					//-----------------------------------------------------------
 
 

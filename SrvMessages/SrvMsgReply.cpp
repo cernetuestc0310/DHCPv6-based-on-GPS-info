@@ -856,17 +856,23 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 				}
 			}
 			pos = i;
-			int a = pos + 3;
-			int ipt = 9;
-			for(; a < ip_add.length(); a++){
+			int a = ip_add.length() - 1;
+			int ipt = 16;
+			for(; a > pos + 2; a--){
 				if(':' != ip_add[a]){
 					if( ':' != mac_add[ipt]){
-						mac_add[ipt++] = ip_add[a];
+						mac_add[ipt--] = ip_add[a];
 					}
 					else{
-						mac_add[++ipt] = ip_add[a];
-						ipt++;
+						mac_add[--ipt] = ip_add[a];
+						ipt--;
 					}
+				}
+				else{
+					while(':' != mac_add[ipt]){
+						ipt--;
+					}
+					ipt--;
 				}
 			}
 			ipt = 7;
@@ -880,6 +886,12 @@ TSrvMsgReply::TSrvMsgReply(SmartPtr<TSrvIfaceMgr> ifaceMgr,
 						mac_add[--ipt] = ip_add[a];
 						ipt--;
 					}
+				}
+				else{
+					while(':' != mac_add[ipt]){
+						ipt--;
+					}
+					ipt--;
 				}
 			}
 			int b = 0;
